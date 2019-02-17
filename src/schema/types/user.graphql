@@ -1,0 +1,20 @@
+type User {
+    id: ID!
+    name: String!
+    email: String
+    password: String!
+    updatedAt: String! @date(format: "yyyy-mm-dd HH:mm")
+    createdAt: String! @date(format: "yyyy-mm-dd HH:mm")
+}
+
+input CreateUserInput {
+    name: String!
+    password: String!
+    email: String!
+}
+
+input UpdateUserInput {
+    name: String
+    email: String
+    password: String
+}

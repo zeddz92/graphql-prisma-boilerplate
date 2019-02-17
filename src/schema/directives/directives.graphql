@@ -1,0 +1,7 @@
+directive @requireAuth on FIELD_DEFINITION | ENUM_VALUE
+
+directive @date(
+    format: String
+    defaultFormat: String = "yyyy-mm-dd HH:mm"
+) on FIELD_DEFINITION
+

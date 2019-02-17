@@ -1,0 +1,26 @@
+# import UserOrderByInput from "../generated/prisma.graphql"
+# import User, CreateUserInput, UpdateUserInput  from "./types/user.graphql"
+# import AuthPayload, LoginUserInput  from "./types/auth.graphql"
+# import @requireAuth from "./directives/directives.graphql"
+
+
+directive @requireAuth(
+    reason: String = "No longer supported"
+) on FIELD_DEFINITION | ENUM_VALUE
+
+type Query {
+    users(query: String, first: Int, skip: Int, after: String, orderBy:UserOrderByInput): [User!]!
+}
+
+type Mutation {
+    login(data: LoginUserInput!): AuthPayload!
+    signup(data: CreateUserInput!): AuthPayload!
+    updateUser(data: UpdateUserInput!): User! @requireAuth
+    deleteUser: User! @requireAuth
+}
+
+enum MutationType {
+    CREATED
+    UPDATED
+    DELETED
+}
