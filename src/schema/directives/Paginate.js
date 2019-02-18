@@ -1,50 +1,34 @@
 import {SchemaDirectiveVisitor} from 'graphql-tools';
-import {defaultFieldResolver} from 'graphql';
 
-const pageInfo = (currentPage, perPage, total) => {
+import query from '../../utils/getQuery';
+
+const pageInfo = (nodes, currentPage, perPage, total) => {
     const lastPage = Math.round(total / perPage);
+    const nextPage = currentPage < lastPage ? currentPage + 1: null;
+    const prevPage = currentPage > 1 ? currentPage - 1: null;
     return {
-        total,
-        currentPage,
-        perPage,
-        lastPage
+        nodes,
+        pageInfo: {
+            total,
+            currentPage,
+            perPage,
+            lastPage,
+            nextPage,
+            prevPage
+        }
     }
 };
 
-
 class Paginate extends SchemaDirectiveVisitor {
     visitFieldDefinition(field, details) {
-        const {resolve = defaultFieldResolver} = field;
-        const {defaultPage, defaultPerPage} = this.args;
-
 
         field.resolve = async function (...params) {
             const args = params[1];
-            const {models} = params[2];
+            const type = field.name;
+            const {page, perPage, nodes, total} = await query(args, type);
 
-            const pagination = params[1].pagination || {};
-            let {page, perPage} = pagination;
-
-            page = page || defaultPage;
-            perPage = perPage || defaultPerPage;
-
-            if(!models.hasOwnProperty(field.name)) {
-                throw new Error('Model could not be found');
-            }
-
-            const model = new models[field.name];
-            const total = await model.count(args.where);
-
-            args.pageInfo = pageInfo(page, perPage, total);
-
-            args.pagination = {
-                first: perPage,
-                skip: (page * perPage) - perPage,
-            };
-
-            return resolve.apply(this, params)
+            return pageInfo(nodes, page, perPage, total);
         }
-
     }
 
     visitEnumValue(value) {
