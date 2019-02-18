@@ -1,7 +1,7 @@
 # import UserOrderByInput, UserWhereInput from "../generated/prisma.graphql"
 # import User, CreateUserInput, UpdateUserInput  from "./types/user.graphql"
 # import AuthPayload, LoginUserInput  from "./types/auth.graphql"
-# import @requireAuth, @paginate from "./directives/directives.graphql"
+# import @requireAuth, @paginate, @default from "./directives/directives.graphql"
 
 
 type Query {
@@ -10,7 +10,7 @@ type Query {
 
 
 input PaginationInput {
-    page: Int
+    page: Int!
     perPage: Int
 }
 type Mutation {
@@ -25,10 +25,8 @@ type PageInfo {
     perPage: Int
     total: Int
     lastPage: Int
-
-#    next_page: Int
-#    prev_page: Int
-#    last_page: Int
+    nextPage: Int
+    prevPage: Int
 }
 
 enum MutationType {
