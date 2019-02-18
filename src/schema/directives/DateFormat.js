@@ -3,7 +3,7 @@ import {GraphQLString, defaultFieldResolver} from 'graphql';
 import dateformat from 'dateformat'
 
 class DateFormat extends SchemaDirectiveVisitor {
-    visitFieldDefinition(field) {
+    visitFieldDefinition(field, details) {
         const {resolve = defaultFieldResolver} = field;
         const {format, defaultFormat} = this.args;
         field.resolve = async function (...args) {

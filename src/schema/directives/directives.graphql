@@ -5,3 +5,7 @@ directive @date(
     defaultFormat: String = "yyyy-mm-dd HH:mm"
 ) on FIELD_DEFINITION
 
+directive @paginate(
+    defaultPage: Int = 1
+    defaultPerPage: Int = 5
+) on FIELD_DEFINITION | ENUM_VALUE

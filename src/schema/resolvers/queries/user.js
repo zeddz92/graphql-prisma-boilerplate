@@ -1,22 +1,25 @@
+function get(obj) {
+
+}
+
 const user = {
 
-    users(parent, args, {prisma}, info) {
+    async users(parent, args, {prisma}, info) {
+
+        const {where, orderBy} = args;
+
         const opArgs = {
-            first: args.first,
-            skip: args.skip,
-            after: args.after,
-            orderBy: args.orderBy,
+            ...args.pagination,
+            where,
+            orderBy
         };
 
-        if(args.query) {
-            opArgs.where = {
-                OR: [{
-                    name_contains: args.query
-                }]
-            };
-        }
+        const nodes = await prisma.query.users(opArgs);
 
-        return prisma.query.users(opArgs, info);
+        return {
+            nodes,
+            pageInfo: args.pageInfo
+        }
     },
 
 };

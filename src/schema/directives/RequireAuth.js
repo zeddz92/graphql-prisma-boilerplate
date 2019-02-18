@@ -5,7 +5,7 @@ import getUserId from '../../utils/getUserId';
 
 class RequireAuth extends SchemaDirectiveVisitor {
 
-    visitFieldDefinition(field) {
+    visitFieldDefinition(field, details) {
         const {resolve = defaultFieldResolver} = field;
 
         field.resolve = async function (...params) {

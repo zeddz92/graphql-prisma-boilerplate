@@ -1,3 +1,5 @@
+# import PageInfo from "../schema.graphql"
+
 type User {
     id: ID!
     name: String!
@@ -5,6 +7,11 @@ type User {
     password: String!
     updatedAt: String! @date(format: "yyyy-mm-dd HH:mm")
     createdAt: String! @date(format: "yyyy-mm-dd HH:mm")
+}
+
+type UsersConnection {
+    nodes: [User!]!
+    pageInfo: PageInfo
 }
 
 input CreateUserInput {
