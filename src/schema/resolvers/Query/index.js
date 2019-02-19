@@ -1,4 +1,4 @@
-import user from "../queries/user";
+import user from "../Query/user";
 
 export default {
     ...user
