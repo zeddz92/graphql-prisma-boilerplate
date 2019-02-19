@@ -19,7 +19,7 @@ const pageInfo = (nodes, currentPage, perPage, total) => {
     }
 };
 
-class Paginate extends SchemaDirectiveVisitor {
+class PaginateDirective extends SchemaDirectiveVisitor {
     visitFieldDefinition(field, details) {
 
         field.resolve = async function (...params) {
@@ -37,4 +37,4 @@ class Paginate extends SchemaDirectiveVisitor {
 
 }
 
-export default Paginate;
+export default PaginateDirective;

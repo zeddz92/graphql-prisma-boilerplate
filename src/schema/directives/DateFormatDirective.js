@@ -2,7 +2,7 @@ import {SchemaDirectiveVisitor} from 'graphql-tools';
 import {GraphQLString, defaultFieldResolver} from 'graphql';
 import dateformat from 'dateformat'
 
-class DateFormat extends SchemaDirectiveVisitor {
+class DateFormatDirective extends SchemaDirectiveVisitor {
     visitFieldDefinition(field, details) {
         const {resolve = defaultFieldResolver} = field;
         const {format, defaultFormat} = this.args;
@@ -19,4 +19,4 @@ class DateFormat extends SchemaDirectiveVisitor {
     }
 }
 
-export default DateFormat;
+export default DateFormatDirective;

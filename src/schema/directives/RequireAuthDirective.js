@@ -3,7 +3,7 @@ import {defaultFieldResolver} from 'graphql';
 
 import getUserId from '../../utils/getUserId';
 
-class RequireAuth extends SchemaDirectiveVisitor {
+class RequireAuthDirective extends SchemaDirectiveVisitor {
 
     visitFieldDefinition(field, details) {
         const {resolve = defaultFieldResolver} = field;
@@ -24,4 +24,4 @@ class RequireAuth extends SchemaDirectiveVisitor {
     }
 }
 
-export default RequireAuth;
+export default RequireAuthDirective;

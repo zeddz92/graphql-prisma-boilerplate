@@ -1,6 +1,6 @@
-import requireAuth from './RequireAuth';
-import date from './DateFormat';
-import paginate from './Paginate';
+import requireAuth from './RequireAuthDirective';
+import date from './DateFormatDirective';
+import paginate from './PaginateDirective';
 
 export default {
     requireAuth,
