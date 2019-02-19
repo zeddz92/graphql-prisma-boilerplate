@@ -1,7 +1,7 @@
 import {extractFragmentReplacements} from 'prisma-binding'
 
-import Query from './queries';
-import Mutation from './mutations';
+import Query from './Query';
+import Mutation from './Mutation';
 import User from './User';
 
 const resolvers = {
