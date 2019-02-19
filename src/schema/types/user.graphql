@@ -1,5 +1,5 @@
 # import PageInfo from "../schema.graphql"
-
+# import @length from "../directives/directives.graphql"
 type User {
     id: ID!
     name: String!
@@ -16,7 +16,7 @@ type UsersConnection {
 
 input CreateUserInput {
     name: String!
-    password: String!
+    password: String! @length(min: 6)
     email: String!
 }
 
